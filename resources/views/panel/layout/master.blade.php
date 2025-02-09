@@ -20,10 +20,10 @@
 
     @yield('content')
 
-	<script src="vendors/bundle.js"></script>
-	<script src="vendors/slick/slick.min.js"></script>
-	<script src="vendors/vmap/jquery.vmap.min.js"></script>
-	<script src="assets/js/app.js"></script>
+	<script src="{{asset('panel/vendors/bundle.js')}}"></script>
+	<script src="{{asset('panel/vendors/slick/slick.min.js')}}"></script>
+	<script src="{{asset('panel/vendors/vmap/jquery.vmap.min.js')}}"></script>
+	<script src="{{asset('panel/assets/js/app.js')}}"></script>
     @livewireScripts
 </body>
 </html>
