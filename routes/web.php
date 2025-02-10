@@ -1,21 +1,20 @@
 <?php
 
-use App\Http\Controllers\PanelController;
-use App\Http\Controllers\UserController;
-use App\Livewire\Admin\Panel\Index;
-use App\Livewire\Admin\Uesr\UsersCreate;
-use App\Livewire\Admin\Uesr\UsersList;
-use App\Livewire\Front\CourseDetaile;
-use App\Livewire\Front\Courses;
-use App\Livewire\Front\Home;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/admin',[PanelController::class,'index'])->name('panel');
-// Route::resource('user', UserController::class);
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/',Home::class)->name('home');
-Route::get('/courses',Courses::class)->name('courses');
-Route::get('/course_detail',CourseDetaile::class)->name('course_detail');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/admin',Index::class)->name('panel');
-Route::get('/admin/users',UsersList::class)->name('user.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
