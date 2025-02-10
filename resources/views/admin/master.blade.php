@@ -15,8 +15,8 @@
     @livewireStyles
 </head>
 <body class="small-navigation">
-    @include('panel.layout.navigation')
-    @include('panel.layout.header')
+    @include('admin.layout.navigation')
+    @include('admin.layout.header')
 
     {{$slot}}
 

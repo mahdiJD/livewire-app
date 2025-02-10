@@ -18,5 +18,4 @@ Route::get('/courses',Courses::class)->name('courses');
 Route::get('/course_detail',CourseDetaile::class)->name('course_detail');
 
 Route::get('/admin',Index::class)->name('panel');
-Route::get('/admin/user_create',UsersCreate::class)->name('user.create');
-Route::get('/admin/user_list',UsersList::class)->name('user.index');
+Route::get('/admin/users',UsersList::class)->name('user.index');
