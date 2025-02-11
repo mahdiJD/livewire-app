@@ -58,7 +58,12 @@
                                 <div class="col-md-4">
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label" for="file"> آپلود عکس </label>
-                                        <input  class="col-sm-10" type="file" class="form-control-file" id="file" wire:model="image">
+                                        <input  class="col-sm-8" type="file" class="form-control-file" id="file" wire:model="image">
+                                        @if ($image)
+                                        <figure class="avatar avatar col-sm-2">
+                                            <img src="{{$image->temporaryUrl()}}" class="rounded-circle" alt="image">
+                                        </figure>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -92,7 +97,7 @@
                                 <td class="text-center align-middle">{{$users->firstItem()+$index}}</td>
                                 <td class="text-center align-middle">
                                     <figure class="avatar avatar">
-                                        <img src="" class="rounded-circle" alt="image">
+                                        <img src="/photos/{{$user->image}}" class="rounded-circle" alt="image">
                                     </figure>
                                 </td>
                                 <td class="text-center align-middle">{{$user->name}}</td>
