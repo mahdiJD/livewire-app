@@ -27,6 +27,42 @@ class UsersList extends Component
     #[Rule('nullable')]
     public $image;
     public $search;
+    public $editUserIndex = null;
+    public function editRow($user_id){
+        $user = User::query()->find($user_id);
+
+        $this->editUserIndex = $user_id;
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->mobile = $user->mobile;
+        $this->image = $user->image;
+
+    }
+
+    public function updateRow($user_id){
+        $user = User::query()->find($user_id);
+        $this->validate([
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|max:255|unique:users,email'.$user_id,
+            'mobile'   => 'unique:users,mobile'.$user_id,
+        ]);
+        if($this->image){
+            $name = time().'.'.$this->image->getClientOriginalExtension();
+            $this->image->storeAs('photos',$name,'public');
+        }else $name = $user->image;
+
+        $user->update([
+            'name'     => $this->name,
+            'email'    => $this->email,
+            'mobile'   => $this->mobile,
+            'password' => $this->password ? Hash::make($this->password) : $user->password,
+            'image'    => $name,
+        ]);
+        $this->reset('name','email','mobile','password','image');
+        $this->editUserIndex = null;
+        session()->flash('message','کاربر ویرایش شد');
+
+    }
 
     public function saveUser(){
         $this->validate();

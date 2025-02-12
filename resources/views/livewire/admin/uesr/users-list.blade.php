@@ -68,9 +68,12 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group row">
+                                        @if ($editUserIndex==null)
                                         <button type="submit" class="btn btn-success btn-uppercase">
-                                            <i class="ti-check-box m-r-5"></i> ذخیره
+                                            <i class="ti-check-box m-r-5"></i> ایجاد
                                         </button>
+                                        @endif
+
 
                                     </div>
                                 </div>
@@ -112,9 +115,16 @@
                                         <span class="cursor-pointer badge badge-success">فعال</span>
                                 </td>
                                 <td class="text-center align-middle">
-                                    <a class="btn btn-outline-info" href="#">
+                                    @if ($editUserIndex==$user->id)
+                                    <a class="btn btn-outline-info" href="#" wire:click='updateRow({{$user->id}})'>
+                                        ذخیره
+                                    </a>
+                                    @else
+                                    <a class="btn btn-outline-info" href="#" wire:click='editRow({{$user->id}})'>
                                         ویرایش
                                     </a>
+                                    @endif
+
                                 </td>
                                 <td class="text-center align-middle">{{$user->created_at}}</td>
                             </tr>
